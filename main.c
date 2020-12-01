@@ -14,6 +14,9 @@ static void sighandler(int signo) {
         }
         char text[100] = "main.c exited due to SIGINT\n";
         int checkWrite = write(toWrite, text, sizeof(text));
+        if (checkWrite == -1) {
+            printf("errno: %d - error: %s\n", errno, strerror(errno));
+        }
         close(toWrite);
         exit(0);
     }
